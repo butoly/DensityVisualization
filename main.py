@@ -1,9 +1,12 @@
 import sys
 import os
 
+
 from PyQt5 import QtWidgets
+import numpy as np
 
 import design
+
 
 
 class ExampleApp(QtWidgets.QMainWindow, design.Ui_Dialog):
@@ -16,11 +19,15 @@ class ExampleApp(QtWidgets.QMainWindow, design.Ui_Dialog):
         self.textEdit.clear() # Чистим текстовое окно
         fname, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file') # Не знаю зачем нижнее подчеркивание, но в докухе так.
 
-        f = open(fname, 'r')
+        #f = open(fname, 'r')
+        data = str(np.load(fname))
+        self.textEdit.setText(data)
 
+        '''
         with f:
             data = f.read()
             self.textEdit.setText(data)
+        '''
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
