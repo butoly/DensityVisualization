@@ -13,8 +13,8 @@ class ExampleApp(QtWidgets.QMainWindow, design.Ui_Dialog):
         self.buttonOpenFile.clicked.connect(self.browse_folder)
 
     def browse_folder(self):
-        self.textEdit.clear()
-        fname = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file')
+        self.textEdit.clear() # Чистим текстовое окно
+        fname, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file') # Не знаю зачем нижнее подчеркивание, но в докухе так.
 
         f = open(fname, 'r')
 
