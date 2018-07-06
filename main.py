@@ -19,15 +19,12 @@ class ExampleApp(QtWidgets.QMainWindow, design.Ui_Dialog):
         self.textEdit.clear() # Чистим текстовое окно
         fname, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file') # Не знаю зачем нижнее подчеркивание, но в докухе так.
 
+        #Вывод исходных данных
         #f = open(fname, 'r')
         data = str(np.load(fname))
         self.textEdit.setText(data)
 
-        '''
-        with f:
-            data = f.read()
-            self.textEdit.setText(data)
-        '''
+        
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
