@@ -1,12 +1,13 @@
 import numpy as np
-import mayavi
-from mayavi import mlab
+import mayavi.mlab as mlab
 
-s = np.load('data/pr772_fourier_space.npy')
+# Create some random data
+N = 20
+x, y, z = np.mgrid[-5:5:30j, -5:5:30j, -5:5:30j]
+s = np.sin(x * y  * z)/(x * y * z)
 
-
-src = mlab.pipeline.scalar_field(s)
-mlab.pipeline.iso_surface(src, contours=[s.min()+0.1*s.ptp(), ], opacity=0.3)
-mlab.pipeline.iso_surface(src, contours=[s.max()-0.1*s.ptp(), ],)
-
+# Plot and show in mayavi2
+#pts = mlab.points3d(x, y, z)#, val, scale_factor=.5,transparent=True)
+#mlab.pipeline.volume(x,y,z)
+mlab.pipeline.volume(mlab.pipeline.scalar_field(s))
 mlab.show()

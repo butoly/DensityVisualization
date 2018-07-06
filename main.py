@@ -16,13 +16,16 @@ class ExampleApp(QtWidgets.QMainWindow, design.Ui_Dialog):
         self.buttonOpenFile.clicked.connect(self.browse_folder)
 
     def browse_folder(self):
-        self.textEdit.clear() # Чистим текстовое окно
-        fname, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file') # Не знаю зачем нижнее подчеркивание, но в докухе так.
+        self.textEdit.clear() 
+        fname, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file')
 
         #Вывод исходных данных
         #f = open(fname, 'r')
         data = str(np.load(fname))
         self.textEdit.setText(data)
+
+    #def vizualization(self):
+        
 
         
 
