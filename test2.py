@@ -1,28 +1,21 @@
 import numpy as np
-from scipy import stats
-from mayavi import mlab
+import mayavi.mlab as mlab
 
+
+x1, y1, z1 = np.ogrid[-10:10:20j, -10:10:20j, -10:10:20j]
+s1 = np.cos(x1*y1*z1)
+
+#x2, y2, z2 = np.ogrid[0:10:10j, 0:10:10j, 0:10:10j]
+#s2 = np.sin(x2*y2*z2)
 
 '''
-mu, sigma = 0, 0.1 
-x = 10*np.random.normal(mu, sigma, 5)
-y = 10*np.random.normal(mu, sigma, 5)
-z = 10*np.random.normal(mu, sigma, 5)
+s = np.array([[[  0,   1,   2],
+        [ 10,  12,  13]],
+       [[100, 101, 102],
+        [110, 112, 113]]])
 '''
 
-x = np.array([1, 16, 7, 4, 8])
-y = np.array([4, 3, 9, 1, 0])
-z = np.array([7, 4, 3, 4, 6])
+mlab.contour3d(s1, opacity = 1)
+#mlab.contour3d(s2)
 
-#xyz = np.load('data/pr772_full_reconst.npy')
-
-xyz = np.vstack([x,y,z])
-print(xyz)
-kde = stats.gaussian_kde(xyz)
-density = kde(xyz)
-
-# Plot scatter with mayavi
-figure = mlab.figure('DensityPlot')
-pts = mlab.points3d(x, y, z, density, scale_mode='none', scale_factor=0.07)
-mlab.axes()
 mlab.show()
