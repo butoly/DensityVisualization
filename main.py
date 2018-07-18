@@ -4,35 +4,45 @@ import os
 from PyQt5 import QtWidgets
 import numpy as np
 import mayavi.mlab as mlab
-
 import design
+
+readFlag = False
+data = ""
 
 class ExampleApp(QtWidgets.QMainWindow, design.Ui_Dialog):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.buttonOpenFile.clicked.connect(self.browse_folder)
-        self.solve.clicked.connect(self.vizualization)
+        self.solve.clicked.connect(self.vizualization, readFlag)
 
     def browse_folder(self):
-        self.textEdit.clear() 
+
+        global readFlag
+        global data
+        
+        self.textEdit.clear()
         fname, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file')
 
-        #Вывод исходных данных
-        #f = open(fname, 'r')
-        data = str(np.load(fname))
-        self.textEdit.setText(data)
-
+        readFlag = False
+        if fname != "":
+            readFlag = True
+            #Чтение исходных данных
+            data = np.load(fname)
+            self.textEdit.setText(str(data))
+        else:
+            readFlag = False
+            
     def vizualization(self):
-        x, y ,z = np.ogrid[-10:10:20j, -10:10:20j, -10:10:20j]
-        s = x + y + z
-        #index = [[[10,10,10]]]
-        #new_s = np.delete(s, index)
-        #s = np.sin(x*y*z)/(x*y*z)
-        #print(s)
-        mlab.pipeline.volume(mlab.pipeline.scalar_field(s), color = (0,1,1))
-        #mlab.contour3d(s)
+
+        global readFlag
+        global data
         
+        if readFlag == True:
+            mlab.contour3d(data,transparent = True, contours = 7)
+        else:
+            self.textEdit.setText("Данные не считаны")
+            
 def main():
     app = QtWidgets.QApplication(sys.argv)
     window = ExampleApp()
@@ -40,6 +50,5 @@ def main():
     mlab.show()
     app.exec_()
     
-
 if __name__ == '__main__':
     main()
