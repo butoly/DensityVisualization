@@ -11,10 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(921, 592)
-        self.graphicsView = QtWidgets.QGraphicsView(Dialog)
-        self.graphicsView.setGeometry(QtCore.QRect(190, 0, 721, 591))
-        self.graphicsView.setObjectName("graphicsView")
+        Dialog.resize(189, 309)
         self.buttonOpenFile = QtWidgets.QPushButton(Dialog)
         self.buttonOpenFile.setGeometry(QtCore.QRect(10, 40, 171, 51))
         self.buttonOpenFile.setObjectName("buttonOpenFile")
@@ -25,13 +22,13 @@ class Ui_Dialog(object):
         self.label.setFont(font)
         self.label.setObjectName("label")
         self.solve = QtWidgets.QPushButton(Dialog)
-        self.solve.setGeometry(QtCore.QRect(10, 100, 171, 31))
+        self.solve.setGeometry(QtCore.QRect(10, 270, 171, 31))
         font = QtGui.QFont()
         font.setPointSize(13)
         self.solve.setFont(font)
         self.solve.setObjectName("solve")
         self.textEdit = QtWidgets.QTextEdit(Dialog)
-        self.textEdit.setGeometry(QtCore.QRect(10, 140, 171, 161))
+        self.textEdit.setGeometry(QtCore.QRect(10, 100, 171, 161))
         self.textEdit.setObjectName("textEdit")
 
         self.retranslateUi(Dialog)
